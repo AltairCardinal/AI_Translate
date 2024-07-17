@@ -1,5 +1,6 @@
 import pandas as pd
 import sys
+import utility
 
 main_col = 'NodeCategory'
 sub_col = ['NodeObjectName','K2NodeName']
@@ -10,7 +11,8 @@ def main():
         print("错误: 缺少文件名参数")
 
     # 加载表
-    df = pd.read_excel(args[1])
+    df = utility.load_table(args[1])
+    print(df)
 
     # 获取主要列
     df_out = pd.DataFrame()
@@ -25,8 +27,9 @@ def main():
             df_out.at[row.Index, s] = r[s].unique().tolist()
 
     # 输出结果
-    df_out.to_excel('out.xlsx', sheet_name='翻译页', index = False)
-    print(f'完成，已输出结果到out.xlsx')
+    _f = utility.add_date_suffix('out.xlsx')
+    df_out.to_excel(_f, sheet_name='翻译页', index = False)
+    print(f'完成，已输出结果到{_f}')
 
 # 程序入口
 if __name__ == "__main__":
