@@ -29,7 +29,7 @@ def get_response(url, data):
 
 def translate(main,sub1,sub2):
     data = {
-    "model": "llama3:8b",
+    "model": "llama3.1:8b",
     "prompt": prompt.substitute(main=main, sub1=sub1, sub2=sub2),
     "stream": False
     }
